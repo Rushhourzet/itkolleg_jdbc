@@ -10,8 +10,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        InvoiceManager im = new InvoiceManager();
-        im.LoadInvoices();
+        InvoiceManager im = new InvoiceManager(false);
+        im.insertInvoice("besteck", 10, true);
         im.showInvoices();
     }
 }

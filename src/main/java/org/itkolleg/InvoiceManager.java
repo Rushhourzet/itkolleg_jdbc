@@ -13,7 +13,7 @@ public class InvoiceManager {
     public InvoiceManager(boolean loadDatabaseIntoArrayList){
         this.invoices = new ArrayList<>();
         if(loadDatabaseIntoArrayList)
-            LoadAllInvoices();
+            loadAllInvoices();
     }
     public InvoiceManager(){
         this.invoices = new ArrayList<>();
@@ -22,7 +22,7 @@ public class InvoiceManager {
     /**
      * Loads the whole SQL Database into invoices (ArrayList of Invoice)
      */
-    private void LoadAllInvoices(){
+    private void loadAllInvoices(){
         invoices = new ArrayList<>();
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -42,7 +42,7 @@ public class InvoiceManager {
         catch(Exception e){ System.out.println(e);}
     }
 
-    private void LoadInvoiceByIndex(int index){
+    private void loadInvoiceByIndex(int index){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:33060/invoices","root","1234");
@@ -73,7 +73,7 @@ public class InvoiceManager {
             Statement stmt=con.createStatement();
             String command = "INSERT INTO invoice (description, value, paid)" +
                     "VALUE("
-                    + _description + ","
+                    +"\""+ _description + "\","
                     + _value + ","
                     + _paid + ")";
             stmt.execute(command);
@@ -83,7 +83,7 @@ public class InvoiceManager {
         catch(Exception e){ System.out.println(e);}
     }
     public void showInvoices(){
-        LoadAllInvoices();
+        loadAllInvoices();
         for (Invoice i: invoices
              ) {
             i.printInvoice();
